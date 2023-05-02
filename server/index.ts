@@ -2,17 +2,22 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import routes from "./src/routes/routes";
 import { Config } from "./src/config";
+import cors from "cors";
 
 dotenv.config();
 // DB config
 Config.DBConfig.setupDBConnection();
-// firebase config
-Config.FirebaseConfig.setupFirebase();
 
 const app: Express = express();
 const port = process.env.PORT;
 
+// cors options
+var corsOptions = {
+	origin: "http://localhost:8081",
+};
+
 // parse body
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use("", routes);
 
@@ -20,6 +25,8 @@ app.get("/", (req: Request, res: Response) => {
 	res.send("Express + TypeScript Server");
 });
 
-app.listen(port, () => {
-	console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
+// set port, listen for requests
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+	console.log(`Server is running on port ${PORT}.`);
 });
