@@ -1,2 +1,2 @@
-export * as AZ from "./az";
-export * as EN from "./en";
+export { default as AZ } from "./az";
+export { default as EN } from "./en";

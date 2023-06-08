@@ -18,8 +18,8 @@ module.exports = {
 	parserOptions: {
 		ecmaVersion: 2020,
 		sourceType: "module",
-		project: "./tsconfig.json",
-		tsconfigRootDir: "./",
+		project: "tsconfig.json",
+		tsconfigRootDir: __dirname,
 	},
 	plugins: ["@typescript-eslint", "import"],
 	env: {
@@ -36,7 +36,7 @@ module.exports = {
 		"object-curly-spacing": [
 			"error",
 			"always",
-			{ objectsInObjects: false, arraysInObjects: false },
+			{ objectsInObjects: true, arraysInObjects: true },
 		],
 		indent: ["error", "tab"],
 		"no-var": "error",

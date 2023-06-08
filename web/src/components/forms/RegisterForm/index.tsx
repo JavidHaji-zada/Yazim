@@ -3,6 +3,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useReducer, useState } from "react";
 import useStyles from "./styles";
+import { UserService } from "@services";
 
 export function RegisterForm(): JSX.Element {
   const theme = useTheme();
@@ -19,6 +20,13 @@ export function RegisterForm(): JSX.Element {
     false
   );
   const [rememberMe, setRememberMe] = useState(false);
+
+  const register = async () => {
+    console.log("register pressed");
+    const { username, firstName, lastName, email, password } = form;
+    await UserService.register(username, firstName, lastName, email, password);
+    console.log("successfully registered");
+  };
 
   return (
     <FormControl sx={{ width: "100%" }}>
@@ -69,7 +77,7 @@ export function RegisterForm(): JSX.Element {
           ),
         }}
       />
-      <Button variant="contained" sx={styles.registerBtn}>
+      <Button variant="contained" sx={styles.registerBtn} onClick={register}>
         Qeydiyyatı Tamamla
       </Button>
     </FormControl>

@@ -1,7 +1,7 @@
 import { Box, Button, useTheme } from "@mui/material";
 import { AppRoute } from "@types";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import useStyles from "./styles";
 
 const invisibleRoutes: AppRoute[] = [];
@@ -9,7 +9,8 @@ const invisibleRoutes: AppRoute[] = [];
 function Header() {
   const theme = useTheme();
   const styles = useStyles(theme);
-  const { route } = useRouter();
+  const router = useRouter();
+  const route = ""; // TODO
 
   if (invisibleRoutes.includes(route as AppRoute)) return <></>;
   return (

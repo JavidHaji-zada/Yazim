@@ -1,6 +1,7 @@
 .env
 
 # build folder
+build
 dist
 
 # node.js

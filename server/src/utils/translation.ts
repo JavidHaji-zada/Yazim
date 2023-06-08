@@ -6,8 +6,8 @@ const LANGUAGE_MAP = {
 	[Language.AZ]: AZ,
 };
 
-const translate = (lang: Language, key: string): string => {
-	return LANGUAGE_MAP[lang][key];
+const translate = (lang: Language | any, key: string): string => {
+	return LANGUAGE_MAP[lang as Language][key];
 };
 
 export default translate;

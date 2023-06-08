@@ -1,6 +1,8 @@
-import { UserDBModel } from "@models/user.model";
+import { User as UserDBModel } from "@models/user.model";
 
 // TODO
 export class User {
-	constructor(details: UserDBModel) {}
+	constructor(details: UserDBModel) {
+		// TODO
+	}
 }

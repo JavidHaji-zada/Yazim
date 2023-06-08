@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import translate from "@utils/translation.util";
+import translate from "@utils/translation";
 import { Language } from "@customTypes/localization";
 
 const authMiddledware = async (
@@ -11,10 +11,7 @@ const authMiddledware = async (
 
 	if (!token) {
 		return res.status(401).json({
-			message: translate(
-				req.headers.language as Language,
-				"token_not_found",
-			),
+			message: translate(req.headers.language, "token_not_found"),
 		});
 	}
 

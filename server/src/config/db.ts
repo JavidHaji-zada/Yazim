@@ -1,4 +1,21 @@
 import { Client, ClientConfig } from "pg";
+import { Sequelize } from "sequelize";
+
+const sequelize = new Sequelize(
+	process.env.POSTGRESQL_DB || "",
+	process.env.POSTGRESQL_USER || "",
+	process.env.POSTGRESQL_PASS,
+	{
+		host: process.env.POSTGRESQL_HOST,
+		dialect: "postgres",
+		pool: {
+			max: 5,
+			min: 0,
+			acquire: 30000,
+			idle: 10000,
+		},
+	},
+);
 
 const setupDBConnection = async () => {
 	const postgresDBConfig: ClientConfig = {
@@ -15,4 +32,4 @@ const setupDBConnection = async () => {
 	});
 };
 
-export const DBConfig = { setupDBConnection };
+export const DBConfig = { setupDBConnection, sequelize };
