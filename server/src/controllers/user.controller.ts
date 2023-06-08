@@ -4,6 +4,8 @@ import UserService from "@services/user.service";
 import { generateJWTTokenForUser } from "@utils/jwt";
 import { HTTPStatusCode } from "@customTypes/http";
 
+const jwtTokenMaxAge = 336 * 60 * 60; // 14 days
+
 class UserController {
 	router: Router;
 
@@ -33,11 +35,10 @@ class UserController {
 				email,
 				password,
 			);
-			const maxAge = 3 * 60 * 60;
 			const token = generateJWTTokenForUser(newUser.id);
 			res.cookie("jwt", token, {
 				httpOnly: true,
-				maxAge: maxAge * 1000,
+				maxAge: jwtTokenMaxAge * 1000,
 			});
 			res.status(HTTPStatusCode.Created).json({
 				user: newUser,
@@ -63,8 +64,11 @@ class UserController {
 
 			// Generate JWT
 			const token = generateJWTTokenForUser(user.id);
-
-			res.status(HTTPStatusCode.Ok).json({ userId: user.id, token });
+			res.cookie("jwt", token, {
+				httpOnly: true,
+				maxAge: jwtTokenMaxAge,
+			});
+			res.status(HTTPStatusCode.Ok).json({ user, token });
 		} catch (error) {
 			next(error);
 		}
